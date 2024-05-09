@@ -15,3 +15,10 @@ class User(Base):
   id = Column(Integer(), primary_key = True)
   username = Column(String())
   
+class Playlist(Base):
+  __tablename__ = 'playlists'
+  
+  id = Column(Integer(), primary_key = True)
+  title = Column(String())
+  user_id = Column(Integer(),ForeignKey('users.id'))
+  

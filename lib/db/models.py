@@ -24,18 +24,24 @@ class User(Base):
   id = Column(Integer(), primary_key = True)
   username = Column(String())
   
+  playlists = relationship('Playlist', backref=backref('user'))
+  
 class Playlist(Base):
   __tablename__ = 'playlists'
   
   id = Column(Integer(), primary_key = True)
   title = Column(String())
   user_id = Column(Integer(),ForeignKey('users.id'))
+  
+  songs = relationship('Song', secondary=song_playlist, back_populates='playlists')
 
 class Artist(Base):
   __tablename__ = 'artists'
   
   id = Column(Integer(), primary_key = True)
   name = Column(String())
+  
+  songs = relationship('Song', backref=backref('artist'))
   
 class Song(Base):
   __tablename__ = 'songs'
@@ -44,3 +50,5 @@ class Song(Base):
   title = Column(String())
   album = Column(String())
   artist_id = Column(Integer(),ForeignKey('artists.id'))
+  
+  playlists = relationship('Playlist', secondary=song_playlist, back_populates='songs')

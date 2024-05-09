@@ -9,6 +9,15 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 Base = declarative_base(metadata=metadata)
 
+song_playlist = Table(
+    'song_playlists',
+    Base.metadata,
+    Column('song_id', ForeignKey('songs.id'), primary_key=True),
+    Column('playlist_id', ForeignKey('playlists.id'), primary_key=True),
+    extend_existing=True,
+)
+
+
 class User(Base):
   __tablename__ = 'users'
   

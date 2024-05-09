@@ -21,4 +21,9 @@ class Playlist(Base):
   id = Column(Integer(), primary_key = True)
   title = Column(String())
   user_id = Column(Integer(),ForeignKey('users.id'))
+
+class Artist(Base):
+  __tablename__ = 'artists'
   
+  id = Column(Integer(), primary_key = True)
+  name = Column(String())

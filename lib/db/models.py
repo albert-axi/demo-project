@@ -31,7 +31,7 @@ class User(Base):
     self.id = id
     
   def __repr__(self):
-    print("ID: {self.id} Username: {self.username}")
+    return f"ID: {self.id} Username: {self.username}"
   
 class Playlist(Base):
   __tablename__ = 'playlists'
@@ -43,11 +43,11 @@ class Playlist(Base):
   songs = relationship('Song', secondary=song_playlist, back_populates='playlists')
   
   def __init__(self, title, id=None):
-    self.ttile = title
+    self.title = title
     self.id = id
     
   def __repr__(self):
-    print("ID: {self.id} Title: {self.title}")
+    return f"ID: {self.id} Title: {self.title}"
 
 class Artist(Base):
   __tablename__ = 'artists'
@@ -62,7 +62,7 @@ class Artist(Base):
     self.id = id
     
   def __repr__(self):
-    print("ID: {self.id} Name: {self.name}")
+    return f"ID: {self.id} Name: {self.name}"
   
 class Song(Base):
   __tablename__ = 'songs'
@@ -80,4 +80,4 @@ class Song(Base):
     self.id = id
     
   def __repr__(self):
-    print("ID: {self.id} Title: {self.title} Album: {self.album}")
+    return f"ID: {self.id} Title: {self.title} Album: {self.album}"

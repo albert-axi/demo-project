@@ -26,6 +26,13 @@ class User(Base):
   
   playlists = relationship('Playlist', backref=backref('user'))
   
+  def __init__(self, username, id=None):
+    self.username = username
+    self.id = id
+    
+  def __repr__(self):
+    print("ID: {self.id} Username: {self.username}")
+  
 class Playlist(Base):
   __tablename__ = 'playlists'
   
@@ -34,6 +41,13 @@ class Playlist(Base):
   user_id = Column(Integer(),ForeignKey('users.id'))
   
   songs = relationship('Song', secondary=song_playlist, back_populates='playlists')
+  
+  def __init__(self, title, id=None):
+    self.ttile = title
+    self.id = id
+    
+  def __repr__(self):
+    print("ID: {self.id} Title: {self.title}")
 
 class Artist(Base):
   __tablename__ = 'artists'
@@ -42,6 +56,13 @@ class Artist(Base):
   name = Column(String())
   
   songs = relationship('Song', backref=backref('artist'))
+  
+  def __init__(self, name, id=None):
+    self.name = name
+    self.id = id
+    
+  def __repr__(self):
+    print("ID: {self.id} Name: {self.name}")
   
 class Song(Base):
   __tablename__ = 'songs'
@@ -52,3 +73,11 @@ class Song(Base):
   artist_id = Column(Integer(),ForeignKey('artists.id'))
   
   playlists = relationship('Playlist', secondary=song_playlist, back_populates='songs')
+  
+  def __init__(self, title, album, id=None):
+    self.title = title
+    self.album = album
+    self.id = id
+    
+  def __repr__(self):
+    print("ID: {self.id} Title: {self.title} Album: {self.album}")
